@@ -1,0 +1,63 @@
+# ============================================================
+# Leaf Anomaly Detection — Central Configuration
+# ============================================================
+# All project settings live here.
+# Change values here instead of touching the code.
+
+# ── Paths (relative to project root) ────────────────────────
+paths:
+  # Where raw images are stored (on Google Drive)
+  data:
+    train_healthy   : data/train/healthy
+    test_healthy    : data/test/healthy
+    test_anomaly    : data/test/anomaly
+
+  # Where computed files are saved (on Google Drive)
+  cache:
+    features        : cache/features
+    pca             : cache/pca
+
+  models            : models
+  outputs           : outputs
+
+# ── Dataset settings ─────────────────────────────────────────
+dataset:
+  # Only use Tomato plant images
+  plant             : Tomato
+  # 80% of healthy images go to train, 20% to test
+  train_split       : 0.8
+
+# ── DINOv2 model settings ────────────────────────────────────
+dino:
+  # Model name from timm library
+  model_name        : vit_small_patch14_reg4_dinov2.lvd142m
+  # Input image size (DINOv2 requires 518x518)
+  image_size        : 518
+  # How many images to process at once
+  batch_size        : 32
+
+# ── PCA settings ─────────────────────────────────────────────
+pca:
+  # Reduce from 384 dimensions to 100
+  # Keeps ~96% of information while removing noise
+  n_components      : 100
+
+# ── Autoencoder settings ──────────────────────────────────────
+autoencoder:
+  # Input = PCA output size
+  input_dim         : 100
+  # Bottleneck size (compressed representation)
+  latent_dim        : 128
+  # Training settings
+  epochs            : 30
+  batch_size        : 64
+  learning_rate     : 0.001
+  # Save checkpoint every N epochs (protects against crashes)
+  checkpoint_every  : 5
+
+# ── Anomaly detection threshold ───────────────────────────────
+threshold:
+  # Use 90th percentile of healthy scores as threshold
+  # Higher = more strict (fewer false alarms, more missed diseases)
+  # Lower  = more sensitive (more false alarms, fewer missed diseases)
+  percentile        : 90

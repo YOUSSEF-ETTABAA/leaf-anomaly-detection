@@ -1,0 +1,23 @@
+# ── Dataset & large files ────────────────────────────────────
+data/
+cache/
+models/
+outputs/
+*.npy
+*.pkl
+*.pth
+
+# ── Python cache ─────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# ── Environment ──────────────────────────────────────────────
+venv/
+.env
+*.egg-info/
+
+# ── OS files ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
