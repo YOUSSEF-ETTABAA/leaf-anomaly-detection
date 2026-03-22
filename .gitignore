@@ -1,8 +1,8 @@
-# ── Dataset & large files ────────────────────────────────────
-data/
-cache/
-models/
-outputs/
+# ── Dataset & large files (root level only) ──────────────────
+/data/
+/cache/
+/models/
+/outputs/
 *.npy
 *.pkl
 *.pth
